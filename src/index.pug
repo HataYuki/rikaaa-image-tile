@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Document
+        link(rel="stylesheet", href="style.css")
+        script(src="app.js")
+        script(src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=doxy")
+        script(src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js")
+        script(src="entryfile.js")
+        
+
+    body
+        div.wp
+            div.bg
+            header
+                h2 rikaaa.org
+            article
+                div.article-inner
+                    section
+                        h1= "<rikaaa-image-tile>"
+                        p The Custom element to impliment tile layout and lazy load.
+                    section.maindemo
+                        p.title Demo
+                        .
+                            <rikaaa-image-tile id="ex1"
+                                row="3"
+                                imagesize="640x400"
+                                imagelength="16"
+                                src="images/sample1.jpg,
+                                images/sample2.jpg,
+                                images/sample3.jpg,
+                                images/sample4.jpg,
+                                images/sample5.jpg,
+                                images/sample6.jpg,
+                                images/sample7.jpg,
+                                images/sample8.jpg,
+                                images/sample9.jpg,
+                                images/sample10.jpg,
+                                images/sample11.jpg,
+                                images/sample12.jpg,
+                                images/sample13.jpg,
+                                images/sample14.jpg,
+                                images/sample15.jpg,
+                                images/sample16.jpg"
+                            ></rikaaa-image-tile>                    
+                    section
+                        p.title Installation
+                        p.sub-title script
+                        pre.prettyprint.lang-html
+                            = '<!-- If you want to use The Custom Element with browser that does not support webcomponents.  -->'
+                            br
+                            = '<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>'
+                            br
+                            br
+                            = '<script src="rikaaa-image-tile.js"></script>'
+
+                    section 
+                        p.title Usage
+                        p.sub-title HTML
+                        pre.prettyprint.lang-html
+                            ='<rikaaa-image-tile'
+                            br
+                            ='    imagesize="640x400"'
+                            br
+                            ='    imagelength="16"'
+                            br
+                            ='    src="images/sample1.jpg,'
+                            br
+                            ='    images/sample2.jpg,'
+                            br
+                            ='    images/sample3.jpg,'
+                            br
+                            ='    images/sample4.jpg,'
+                            br
+                            ='    images/sample5.jpg,'
+                            br
+                            ='    images/sample6.jpg,'
+                            br
+                            ='    images/sample7.jpg,'
+                            br
+                            ='    images/sample8.jpg,'
+                            br
+                            ='    images/sample9.jpg,'
+                            br
+                            ='    images/sample10.jpg,'
+                            br
+                            ='    images/sample11.jpg,'
+                            br
+                            ='    images/sample12.jpg,'
+                            br
+                            ='    images/sample13.jpg,'
+                            br
+                            ='    images/sample14.jpg,'
+                            br
+                            ='    images/sample15.jpg,'
+                            br
+                            ='    images/sample16.jpg"'
+                            br
+                            ='></rikaaa-image-tile>'
+                            br
+                        
+                        p.sub-title Javascript
+                        div.description-area
+                            p The code blow shown is not essential.
+                            p The height of custom element is dynamic.
+                            p If you care about this dynamics, it is recommended that add following codes.
+
+                        pre.prettyprint.js
+                            = '// scroll to top of tile when click.'
+                            br
+                            = 'var currentScrollY = 0;'
+                            br
+                            = 'var marginTop = 16;'
+                            br
+                            br
+                            = 'var tile_demo = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            = 'tile_demo.addEventListener("tileClick", function (event) {'
+                            br
+                            = '    if (event.detail.zoomin) currentScrollY = window.pageYOffset;'
+                            br
+                            = '});'
+                            br
+                            br
+                            = 'tile_demo.addEventListener("zoom", function (event) {'
+                            br
+                            br
+                            = '    if (event.detail.zoomin === false) return false;'
+                            br
+                            br
+                            = '    var desireScrollTop = tile_demo.offsetTop - marginTop;'
+                            br
+                            = '    var diffFromDisire = desireScrollTop - currentScrollY;'
+                            br
+                            = '    var newScrollY = currentScrollY + diffFromDisire * event.detail.zoomRatio;'
+                            br
+                            br
+                            = '    window.scrollTo(0, newScrollY);'
+                            br
+                            br
+                            = '});'
+                            br
+                            
+
+                    section.ui
+                        p.title UI
+                        ul.col-layout
+                            li
+                                figure
+                                    img(src="images/rikaaa-image-tile-Figure1.jpg")
+                                    figcaption= 'figure1 : when zoom out.'
+                                    p It can be close-uped by click the image.
+                                    p The images shown are indecated as same width and height.
+                                    p
+                                        = 'The parameter utilzing in this custom element as the "index" '
+                                        | is categorized as above figure.
+
+                                    
+                            li
+                                figure
+                                    img(src="images/rikaaa-image-tile-Figure2.jpg")
+                                    figcaption= 'figure2 : when zoom in.'
+                                    p It is possible to transfar the image by drag, when close-uped.
+                                    p Following four user interface will be indecated, when close-uped.
+                                    ol
+                                        li 
+                                            p EdgeGide of top
+                                        li 
+                                            p EdgeGide of rigth
+                                        li 
+                                            p EdgeGide of bottom
+                                        li 
+                                            p EdgeGide of left
+
+                                    p Each EdgeGide will be indecated how mach achieved to the limit of drag availavlity.
+                         
+
+                    section 
+                        p.title Attributes
+                        table.attribute-table
+                            thead
+                                tr
+                                    td.attr Attribute
+                                    td.require Require
+                                    td.desc Description
+                            tbody
+                                tr
+                                    td src = "string"
+                                    td Require
+                                    td 
+                                        p= 'The parameter to set image path for load the webcomponent by the text string.'
+                                        p= 'Need to same image size.'
+                                        p= 'Able to set image path more than one.'
+                                        p= 'Set of image path by ",".'
+                                        p= 'Example: "src="image/sample00.jpg,image/sample01.jpg"'
+                                        
+                                
+                                        
+                                tr
+                                    td imagesize = "string"
+                                    td Require
+                                    td 
+                                        p= 'The parameter to set image size by text string.'
+                                        p= 'For Example, in case of 640px width x 400px height image size to be utilize,'
+                                        p= 'set of as "imagesize="640x400"'
+                                tr
+                                    td imagelength = "integer"
+                                    td Require
+                                    td 
+                                        p= 'The parameter to set image length by integral number.'
+
+                                tr
+                                    td row = "integer"
+                                    td
+                                    td 
+                                        p= 'The parameter to set number of column by integral number.'
+                                        p= 'The default value is 4.'
+                                        p= 'The minimum value is 1.'
+                                        p= 'The number of row will be calculated automatically.'
+                                        
+                                tr
+                                    td duration = "integer"
+                                    td 
+                                    td 
+                                        p= 'The parameter to set duration of entire animation by integral number.'
+                                        p= 'The unit is millisecond.'
+                                        p= 'The default value is 500.'
+                                tr
+                                    td zoomable = "boolean"
+                                    td
+                                    td 
+                                        p= 'The parameter to deside acceptance of close-up by truth value.'
+                                        p= 'The default value is true.'
+                                tr
+                                    td dragable = "boolean"
+                                    td
+                                    td 
+                                        p= 'The parameter to deside acceptance of transfer viewing point by truth value.'
+                                        p= 'The default value is true.'
+                                tr
+                                    td hoverable = "boolean"
+                                    td
+                                    td 
+                                        p= 'The parameter to deside following actions by truth value.'
+                                        p= 'Action1 : Alter the opacity of the image below cursor.'
+                                        p= 'Action2 : Alter the cursor icon, in case cursor is on the image.'
+                                        p= 'The default value is true.'
+                                tr
+                                    td iszoomedstart = "boolean"
+                                    td 
+                                    td 
+                                        p= 'The parameter to deside initialization by truth value duaring close-uped situation.'
+                                        p= 'The default value is false.'
+                                        p= 'Direction of close-up to the image should be desided by the "firstselect" parameter when this parameter truth.'
+                                tr
+                                    td firstselect = "integer"
+                                    td
+                                    td 
+                                        p= 'The parameter to deside direction of close-up to image when this webcomponent initialized.'
+                                        p= 'The default value is zero.'
+                                        p= 'The minimum value is zero. The maximum value is the number of image minus one.'
+                                        p= 'The parameter is utilized mainly in case "iszoomedstard" is true.'
+
+                                tr
+                                    td loadtiming = "string"
+                                    td
+                                    td 
+                                        p= 'The parameter to set timing of image loading by text string.'
+                                        p= 'This parameter is equivalent with "rootMargin" parameter of Intersection Observer API.'
+                                        p= 'The default value is "100px 0px 100px 0px".'
+                                        p= 'The unit is pixel or percentage.'
+                                tr
+                                    td backgroundcolor = "color"
+                                    td
+                                    td
+                                        p= 'The parameter to set background-color.'
+                                        p= 'The value able to set this parameter is corresponding the format indecated by CSS.'
+                                        p= 'The default value is "rgba(255,255,255,1)".'
+                                tr
+                                    td opacityofselected = "float"
+                                    td 
+                                    td 
+                                        p= 'The parameter to set opacity of image by floating decimal point.'
+                                        p= 'The opacity indecated by this parameter will be applicable to image bellow cursor.'
+                                        p= 'The default value is 0.7.'
+                                tr
+                                    td endgideable = "boolean"
+                                    td
+                                    td 
+                                        p= 'The parameter to deside visiblity of EdgeGide.'
+                                        p= 'The default value is ture.'
+                                tr
+                                    td endgidewidth = "integer"
+                                    td
+                                    td 
+                                        p= 'The parameter to set width of EdgeGide.'
+                                        p= 'The unit is pixel.'
+                                        p= 'The default value is three.'
+                                tr
+                                    td endgidebarcolor = "color"
+                                    td
+                                    td 
+                                        p= 'The parameter to set color of EdgeGide.'
+                                        p= 'The value able to set this parameter is corresponding the format indecated by CSS.'
+                                        p= 'The default value is "white".'
+
+                    section 
+                        p.title Methods
+                        p.sub-title="rikaaaimagetile.setRoot(Element)"
+                        div.description-area
+                            p Set a Element Node as View-port.
+                            p This Element is equivalent with "root" parameter of Intersection Observer API.
+                        pre.prettyprint.lang-js
+                            ='var load_Ev = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='load_Ev.addEventListener("load", () => {'
+                            br
+                            br
+                            ='    tile_domload.setRoot(document.querySelector(".maindemo"));'
+                            br
+                            br
+                            ='});'
+                    section
+                        p.title Events
+                        p.sub-title='addEventListener("load",callback)'
+                        div.description-area
+                            p This event will be triggered when the custom element loaded.
+                        pre.prettyprint.lang-js
+                            ='var load_Ev = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_loadEv.addEventListener("load", function () {'
+                            br
+                            ='    console.log("load");'
+                            br
+                            ='});'
+                            br
+
+                        p.sub-title= 'addEventListener("tileLoad",callback)'
+                        div.description-area
+                            p This event will be triggered when the image loaded.
+                        pre.prettyprint.lang-js
+                            ='var tile_loadEv = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_loadEv.addEventListener("tileLoad", function () {'
+                            br
+                            ='    console.log("tile loaded");'
+                            br
+                            ='});'
+                            br
+
+                        p.sub-title= 'addEventListener("zoom",callback)'
+                        div.description-area
+                            p The event will be triggered duaring close-upping animation.
+                        pre.prettyprint.lang-js
+                            ='var tile_zoomEv = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_zoomEv.addEventListener("zoom", function (event) {'
+                            br
+                            ='    let zoomIs = (event.detail.zoomin) ? "in" : "out";'
+                            br
+                            ='    console.log("zoom " + zoomIs);'
+                            br
+                            ='    console.log("zoom ratio : " + event.detail.zoomRatio);'
+                            br
+                            ='});'
+                            br
+
+                        p.sub-title= 'addEventListener("offsetChange",callback)'
+                        div.description-area
+                            p The event will be triggered duaring transfering view point.
+                        pre.prettyprint.lang-js
+                            ='var tile_offsetChangeEv = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_offsetChangeEv.addEventListener("offsetChange", function (event) {'
+                            br
+                            ='    console.log("offsetX from center by pixel : " + event.detail.offsetXFromCenter);'
+                            br
+                            ='    console.log("offsetY from center by pixel : " + event.detail.offsetYFromCenter);'
+                            br
+                            ='    console.log("offsetX ratio from left : " + event.detail.offsetXRatioFromLeft);'
+                            br
+                            ='    console.log("offsetY ratio from top : " + event.detail.offsetYRatioFromTop);'
+                            br
+                            ='});'
+                            br
+
+                        p.sub-title= 'addEventListener("selectedChange",callback)'
+                        div.description-area
+                            p The event will be triggered when close-pu direction was chenged.
+                        pre.prettyprint.lang-js
+                            ='var tile_selectedChangeEv = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_selectedChangeEv.addEventListener("selectedChange", function (event) {'
+                            br
+                            ='    console.log("current selected index of tile : " + event.detail.currentIndex); '
+                            br
+                            ='});'
+                            br
+
+                        p.sub-title= 'addEventListener("tileClick",callback)'
+                        div.description-area
+                            p The event will be triggered when image was clicked.
+                        pre.prettyprint.lang-js
+                            ='var tile_tileClickEv = document.getElementsByTagName("rikaaa-image-tile")[0];'
+                            br
+                            br
+                            ='tile_tileClickEv.addEventListener("tileClick", function (evnet) {'
+                            br
+                            ='    let zoomIs = (event.detail.zoomin) ? "in" : "ou";'
+                            br
+                            ='    console.log("this click is \"zoom " + zoomIs + "\"");'
+                            br
+                            ='    console.log("current selected index of tile : " + event.detail.currentIndex);'
+                            br
+                            ='});'
+                            br
+                            

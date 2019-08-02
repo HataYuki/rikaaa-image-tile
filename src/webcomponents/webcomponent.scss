@@ -1,0 +1,91 @@
+$barWidth:3;
+$barColor:white;
+
+:host{ 
+  display: block;
+  width: 100%;
+  position: relative;
+  *{
+    box-sizing: border-box;
+  }
+  canvas{
+    vertical-align: bottom;
+  }
+  .canvas-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    .gide-ui {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .gide-wrap {
+        position: absolute;
+
+        .gide-inner {
+          width: 100%;
+          height: 100%;
+        }
+
+        &.top-end-gide,
+        &.bottom-end-gide {
+          width: 100%;
+          height: $barWidth + px;
+        }
+
+        &.right-end-gide,
+        &.left-end-gide {
+          width: $barWidth + px;
+          height: 100%;
+
+          .gide-inner {
+            position: relative;
+
+            .bar {
+              position: absolute;
+            }
+          }
+        }
+
+        &.top-end-gide {
+          top: 0;
+        }
+
+        &.bottom-end-gide {
+          bottom: 0;
+        }
+
+        &.right-end-gide {
+          right: 0;
+        }
+
+        &.left-end-gide {
+          left: 0;
+        }
+
+        .bar {
+          background-color: $barColor;
+          width: 100%;
+          height: 100%;
+
+          &.top-end-gide-bar,
+          &.bottom-end-gide-bar {
+            width: 100%;
+            margin: 0 auto;
+          }
+
+          &.right-end-gide-bar,
+          &.left-end-gide-bar {
+            height: 100%;
+            top: 50%;
+            bottom: 50%;
+            margin: auto 0;
+          }
+        }
+      }
+    }
+  }
+}
