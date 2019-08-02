@@ -260,6 +260,11 @@ export default class rikaaaimagetile extends HTMLElement {
        });
     }
     prepareIntersection(root, rootMargin) {
+        if (this.elementInViewPort) {
+            this.elementInViewPort.unobserve(this);
+            this.elementInViewPort.disconnect();
+        }
+
         const option = {};
 
         if (root) option.root = root;

@@ -5,7 +5,7 @@ ready(() => {
 
      let load_Ev = document.getElementsByTagName("rikaaa-image-tile")[0];
      load_Ev.addEventListener('load', () => {
-         // tile_domload.setRoot(document.querySelector('.maindemo'));
+        //  load_Ev.setRoot(document.querySelector('.maindemo'));
          console.log("load");
      });
 
